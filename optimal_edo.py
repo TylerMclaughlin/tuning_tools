@@ -12,7 +12,7 @@ DEBUG = False
 A4 = 440
 C0 = A4*pow(2, -4.75)
 C4 = C0*2**4
-name = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     
 def pitch_from_freq(freq):
     abs_note_num = 12*log2(freq/C0) 
@@ -20,7 +20,7 @@ def pitch_from_freq(freq):
     cents = (abs_note_num - int_note_num)*100
     octave = int_note_num // 12
     n = int_note_num % 12
-    return name[n], octave, cents
+    return note_names[n], octave, cents
 
 
 def get_edo_frame(n, root = C4):
