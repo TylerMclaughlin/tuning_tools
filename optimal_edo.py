@@ -25,7 +25,7 @@ def pitch_from_freq(freq):
 
 def get_edo_frame(n, root = C4):
     # default root is C4.
-    edo_columns = ['frequency','pitch_class','octave','cents_from_12_tet']
+    edo_columns = ['frequency','pitch_class','octave','cents_from_12_tet', 'edo_note_number']
     edo_index = range(0, n)
     edo_frame = pd.DataFrame(index=edo_index, columns=edo_columns)
     for x in edo_index:
@@ -36,6 +36,7 @@ def get_edo_frame(n, root = C4):
         edo_frame.loc[x,'pitch_class'] = pc
         edo_frame.loc[x,'octave'] = o 
         edo_frame.loc[x,'cents_from_12_tet'] = c
+        edo_frame.loc[x,'edo_note_number'] = x
     return edo_frame
     
 
@@ -233,7 +234,7 @@ def just_vs_all_edos(min_n = 7, max_n = 20):
 
 def tidy_just_edo_frame(just_edo_df):
     just_edo_df = just_edo_df[~just_edo_df.pitch_class_smaller.isna()]
-    just_edo_df = just_edo_df[['name_1', 'name_2', 'root_1', 'pitch_class_smaller', 'cents_diff', 'matched_pitch_class']]
+    just_edo_df = just_edo_df[['name_1', 'name_2', 'root_1', 'pitch_class_smaller', 'edo_note_number', 'cents_diff', 'matched_pitch_class']]
     n_edo = just_edo_df["name_1"].str.split("_", n = 1, expand = True)
     just_edo_df['n_edo'] = n_edo[0]
     just_edo_df.drop(columns =["name_1"], inplace = True) 
