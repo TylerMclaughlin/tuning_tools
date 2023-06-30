@@ -187,6 +187,9 @@ def scale_dist(df1, df2, scale1_name, scale2_name, root_scale1_name):
            if abs(ij_cents) < abs(min_cents):
                min_cents = ij_cents
                min_index = j
+           # MAY NEED TO IGNORE THESE MESSAGES FOR HIGHER EDOS.
+           elif (abs(ij_cents) >= (abs(min_cents) - 0.00001 )) & (abs(ij_cents) <= (abs(min_cents) + 0.00001 )):
+               print('current scale is indistinguishably as good as another scale.')
         df2.loc[i,'matched_pitch_class'] = df1.loc[min_index, 'pitch_class']
         df2.loc[i,'matched_frequency'] = df1.loc[min_index, 'frequency']
         if DEBUG:
@@ -232,18 +235,22 @@ def just_vs_all_edos(min_n = 7, max_n = 20):
         edo_just_frames.append(edo_just_frame_n)
     return pd.concat(edo_just_frames)
 
-def tidy_just_edo_frame(just_edo_df):
+def tidy_just_edo_frame(just_edo_df, save_table = False):
     just_edo_df = just_edo_df[~just_edo_df.pitch_class_smaller.isna()]
     just_edo_df = just_edo_df[['name_1', 'name_2', 'root_1', 'pitch_class_smaller', 'edo_note_number', 'cents_diff', 'matched_pitch_class']]
     n_edo = just_edo_df["name_1"].str.split("_", n = 1, expand = True)
     just_edo_df['n_edo'] = n_edo[0]
     just_edo_df.drop(columns =["name_1"], inplace = True) 
     #just_edo_df.to_csv('just_vs_edo_7_to_20.csv')
-    just_edo_df.to_csv('data/just_vs_edo_7_to_42.csv')
+    if save_table:
+        just_edo_df.to_csv('data/just_vs_edo_7_to_42.csv')
+    return just_edo_df
     
 
 def main():
-    jd = just_vs_all_edos(max_n = 43)
-    tidy_just_edo_frame(jd)
+    #jd = just_vs_all_edos(max_n = 43)
+    jd = just_vs_all_edos(max_n = 107)
+    #tidy_just_edo_frame(jd)
+    tidy_just_edo_frame(jd, save_table = True)
 
 
