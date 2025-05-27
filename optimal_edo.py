@@ -253,4 +253,4 @@ def main():
     #tidy_just_edo_frame(jd)
     tidy_just_edo_frame(jd, save_table = True)
 
-
+main()

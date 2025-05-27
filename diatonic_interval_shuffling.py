@@ -102,9 +102,10 @@ def extract_solns(a,b,z_edo):
 upcs, uis = extract_solns(3,2,20)
 
 for i, x in enumerate(upcs):
-    print("Scale: "," ".join([str(xi) for xi in x]))
-    print("Intervals: ", uis[i])
-    print(sorted([f'{k} : {v}' for k,v in Counter(uis[i]).items()]))
+    #print("Scale: "," ".join([str(xi) for xi in x]))
+    #print("Intervals: ", " ".join([str(x) for x in uis[i]]))
+    #print(sorted([f'{k} : {v}' for k,v in Counter(uis[i]).items()]))
+    print( " ".join([str(x) for x in uis[i]]))
     
 
 
