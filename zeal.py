@@ -86,25 +86,27 @@ def print_steps(r_index_list, zeal_df):
     print(Counter(unique_harms))
 
 
-z31 = rotate(31,64, 400)
-z31 = rotate(53,64, 400)
-z31 = rotate(38,64, 400)
-#m = pivot_zeal(z31)
-#z34 = rotate(19,64, 400)
-#z21 = rotate(21,64, 400)
-m = pivot_zeal(z31)
-m = gaussian_filter(m, sigma=4, axes = 1, mode = 'wrap')
-c = sns.clustermap(m, col_cluster= False)
-c.cax.set_visible(False)
-#c.ax_heatmap.set_title('Clustering the rotational alignment of 31-EDO with the first 64 harmonics')
-#c.ax_heatmap.set_title('Clustering the rotational alignment of 19-EDO with the first 64 harmonics')
-plt.show()
+def main():
+    z31 = rotate(31,64, 400)
+    z31 = rotate(53,64, 400)
+    z31 = rotate(38,64, 400)
+    #m = pivot_zeal(z31)
+    #z34 = rotate(19,64, 400)
+    #z21 = rotate(21,64, 400)
+    m = pivot_zeal(z31)
+    m = gaussian_filter(m, sigma=4, axes = 1, mode = 'wrap')
+    c = sns.clustermap(m, col_cluster= False)
+    c.cax.set_visible(False)
+    #c.ax_heatmap.set_title('Clustering the rotational alignment of 31-EDO with the first 64 harmonics')
+    #c.ax_heatmap.set_title('Clustering the rotational alignment of 19-EDO with the first 64 harmonics')
+    plt.show()
+    
+    #print_steps([8,86,218, 255, 334], z31 )
+    # 53
+    #print_steps([60, 160, 245, 339, 393], z31 )
+    # 38 
+    print_steps([30,90,140,180,240,270,340,393], z31 )
 
-#print_steps([8,86,218, 255, 334], z31 )
-# 53
-#print_steps([60, 160, 245, 339, 393], z31 )
-# 38 
-print_steps([30,90,140,180,240,270,340,393], z31 )
-
-
+if __name__ == '__main__':
+    main()
 
