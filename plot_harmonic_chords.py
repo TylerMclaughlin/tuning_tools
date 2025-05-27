@@ -58,7 +58,10 @@ def plot_vals(sub_df, xlim, title, color = 'red'):
     ax.set_xlim(xlim[0], xlim[1])
     ax.set_ylim(-0.5, 0.5)
     ax.set_xlabel('Cents')
-    ax.set_title(f'{title} harmonic series intervals')
+    plot_name = f'{title} harmonic series intervals'
+    plot_filename = plot_name.replace(' ', '_')
+    plot_filename += '.png'
+    ax.set_title(plot_name)
     
     # Remove y-axis ticks and labels since we only care about x-values
     ax.set_yticks([])
@@ -67,6 +70,7 @@ def plot_vals(sub_df, xlim, title, color = 'red'):
     ax.grid(True, alpha=0.3)
     
     plt.tight_layout()
+    plt.savefig('harmonic_degrees/' + plot_filename)
     plt.show()
 
 DEGREE_NAMES = ['Minor Second', 'Major Second', 'Minor Third', 'Major Third',
